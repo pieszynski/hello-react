@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Przycisk({ gcount, gonClick }: { gcount: number, gonClick: () => void}) {
   const [count, setCount] = useState<number>(0);
@@ -58,6 +58,16 @@ function ShowColors() {
 
 export default function Domowiec() {
   const [count, setCount] = useState(0);
+  const [hello, setHello] = useState<string>('');
+
+  useEffect(() => {
+    fetch(`/api/hello`, { cache: 'no-store' })
+      .then(f => f.json())
+      .then(t => {
+        console.log('got text', t);
+        setHello(t.data);
+      })
+  }, []);
 
   function clicky() {
     setCount(count + 1);
@@ -76,6 +86,10 @@ export default function Domowiec() {
         <Autor />
       </div>
       <ShowColors />
+      <div>
+        <span>From fetch: </span>
+        <span><i>{hello}</i></span>
+      </div>
     </div>
   );
 }
