@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { Game } from "./tic-tac-toe";
 
 function Przycisk({ gcount, gonClick }: { gcount: number, gonClick: () => void}) {
   const [count, setCount] = useState<number>(0);
@@ -84,6 +85,10 @@ export default function Domowiec() {
       </p>
       <div>
         <Autor />
+      </div>
+      <div>
+        <h2>Kółko i krzyżyk</h2>
+        <Game />
       </div>
       <ShowColors />
       <div>
